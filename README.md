@@ -1,5 +1,6 @@
-# Feniks
-A computer based NVR (Network Video Recorder) with AI capabilities 
+<img src="https://github.com/mehmetgoren/feniks/blob/main/logo.png" />
+
+# Feniks -A computer based NVR (Network Video Recorder) with AI capabilities 
 
 * The installation process can be done effortlessly since all nine services are Dockerized and can be run by Docker-Compose in one single command.
 
