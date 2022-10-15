@@ -1,4 +1,4 @@
-<img src="https://github.com/mehmetgoren/feniks/blob/main/logo.png" />
+<img src="https://github.com/mehmetgoren/feniks/blob/main/logo.png" width="150" height="150"/>
 
 # Feniks -A computer based NVR (Network Video Recorder) with AI capabilities 
 
