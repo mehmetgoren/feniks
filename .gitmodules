@@ -13,3 +13,6 @@
 [submodule "deepstack_service"]
 	path = deepstack_service
 	url = https://github.com/mehmetgoren/deepstack_service.git
+[submodule "cv2_read_service"]
+	path = cv2_read_service
+	url = https://github.com/mehmetgoren/cv2_read_service.git
