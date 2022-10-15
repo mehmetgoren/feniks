@@ -4,3 +4,6 @@
 [submodule "mngr"]
 	path = mngr
 	url = https://github.com/mehmetgoren/mngr.git
+[submodule "detect_service"]
+	path = detect_service
+	url = https://github.com/mehmetgoren/detect_service.git
