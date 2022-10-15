@@ -1,4 +1,6 @@
-<img src="https://github.com/mehmetgoren/feniks/blob/main/logo.png" width="150" height="150"/>
+<p align="center">
+    <img src="https://github.com/mehmetgoren/feniks/blob/main/logo.png" width="150" height="150"/>
+</p>
 
 # Feniks - A computer based NVR with AI capabilities 
 
