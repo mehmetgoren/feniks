@@ -28,3 +28,6 @@
 [submodule "alpr"]
 	path = alpr
 	url = https://github.com/mehmetgoren/alpr.git
+[submodule "smcp"]
+	path = smcp
+	url = https://github.com/mehmetgoren/smcp.git
