@@ -25,3 +25,6 @@
 [submodule "onvf"]
 	path = onvf
 	url = https://github.com/mehmetgoren/onvf.git
+[submodule "alpr"]
+	path = alpr
+	url = https://github.com/mehmetgoren/alpr.git
