@@ -15,23 +15,23 @@ A computer based NVR (Network Video Recorder) with AI capabilities
     * The Cloud and Notification Service (GoLang).
     * The Web/Websockets Server Service (Golang).
     * The Web Application (Javascript/Typescript, Vue3, Quasar).
-    * The Persistent RTSP Reader Service For AI (Python).<br /> <br />
-* Runs natively on Linux. Windows and macOS are not officialy supported. <br /> <br />
-* Uses FFmpeg to handle video, audio, snapshot, probing and streaming. <br /> <br />
-* Uses Redis as a main NoSql database and massage broker. <br /> <br />
-* MongoDB / SQLite is used for AI Events and query databases.<br /> <br />
-* The web application supports more than one user and node server.<br /> <br />
-* The UI app was developed by using Vue 3. It uses gridstack js to support highly customizable (like resize, dragging) video players.<br /> <br />
+    * The Persistent RTSP Reader Service For AI (Python).<br />
+* Runs natively on Linux. Windows and macOS are not officialy supported. <br />
+* Uses FFmpeg to handle video, audio, snapshot, probing and streaming. <br />
+* Uses Redis as a main NoSql database and massage broker. <br />
+* MongoDB / SQLite is used for AI Events and query databases.<br /> 
+* The web application supports more than one user and node server.<br />
+* The UI app was developed by using Vue 3. It uses gridstack js to support highly customizable (like resize, dragging) video players.<br />
 * Supported Deep-Learning Frameworks: PyTorch, Tensorflow and the Nvidia Jetson Library and  can be selected from the Config page.
     * **PyTorch**: YOLOV5, [AlexNet](https://arxiv.org/abs/1404.5997), [VGG](https://arxiv.org/abs/1409.1556), [GoogLeNet](https://arxiv.org/abs/1409.4842), [MobileNetV3](https://arxiv.org/abs/1905.02244). For more information: [https://pytorch.org/vision/stable/models.html](https://pytorch.org/vision/stable/models.html)
     * **Tensorflow**: Resnet V2, SSD, Faster RCNN, EfficientDet. For more information: [https://tfhub.dev/tensorflow/collections/object_detection](https://tfhub.dev/tensorflow/collections/object_detection)
-    * **Nvidia Jetson**: LPDNet, PeopleNet, ResNet-50, SSD. For more information: https://developer.nvidia.com/ai-models<br /> <br />
-* Automatic plate recognition performs very well since it has a built-in job scheduler and LPR docker containers can be scaled up horizontally.<br /> <br />
-* It has a built-in watchdog mechanism to monitor all processes and recover them.<br /> <br />
-* It can scan the whole network to find cameras which have RTSP broadcasts. You don’t need to find cameras’ IPs to register the system. All is done automatically.<br /> <br />
-* All running node services can be viewed on the UI app. All Services can be started/stopped by using the services page.<br /> <br />
-* The services are tested on x86 workstation, Dell Intel x86 laptop, Raspberry PI (ARM664) and Nvidia Jetson Nano. <br /> <br />
-* Broken / failed connections are shown in the information page. If a stream fails more than once in a given time, a notification will be sent to receivers (users) by the cloud provider service.<br /> <br />
+    * **Nvidia Jetson**: LPDNet, PeopleNet, ResNet-50, SSD. For more information: https://developer.nvidia.com/ai-models<br />
+* Automatic plate recognition performs very well since it has a built-in job scheduler and LPR docker containers can be scaled up horizontally.<br />
+* It has a built-in watchdog mechanism to monitor all processes and recover them.<br />
+* It can scan the whole network to find cameras which have RTSP broadcasts. You don’t need to find cameras’ IPs to register the system. All is done automatically.<br />
+* All running node services can be viewed on the UI app. All Services can be started/stopped by using the services page.<br />
+* The services are tested on x86 workstation, Dell Intel x86 laptop, Raspberry PI (ARM664) and Nvidia Jetson Nano. <br />
+* Broken / failed connections are shown in the information page. If a stream fails more than once in a given time, a notification will be sent to receivers (users) by the cloud provider service.<br />
 * Supported Stream Types are shown below:
     |   |  Hardware Demand | Latency  | Compatibility  |
     |---|---|---|---|
@@ -57,7 +57,7 @@ A computer based NVR (Network Video Recorder) with AI capabilities
     * MP4
     * WebM
     <br />
-* All AI events (Object Detection, Face Recognition, Plate Recognition) can be queried by date, time, camera, label and score. All those fields are all indexed and saved as denormalized entities to provide best read performance even for big data.<br /> <br />
+* All AI events (Object Detection, Face Recognition, Plate Recognition) can be queried by date, time, camera, label and score. All those fields are all indexed and saved as denormalized entities to provide best read performance even for big data.<br />
 * It can store detected objects on clouds. Current cloud providers are: 
   * Google Gdrive 
   * Telegram
@@ -68,8 +68,8 @@ A computer based NVR (Network Video Recorder) with AI capabilities
     * PSNR: Similar to Imagehash
     <br />
 * Re-streaming via RTMP to reduce the number of connections to your camera
-    ![image info](./loopback_arc.png)
-    <br /> <br />
+    ![image info](https://github.com/mehmetgoren/feniks/blob/main/loopback_arc.png)
+    <br />
 <br />
 **Currently Developing Features List (Ordered By Release Date)**
 
