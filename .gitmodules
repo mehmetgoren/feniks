@@ -16,3 +16,6 @@
 [submodule "cv2_read_service"]
 	path = cv2_read_service
 	url = https://github.com/mehmetgoren/cv2_read_service.git
+[submodule "ffmpeg_service"]
+	path = ffmpeg_service
+	url = https://github.com/mehmetgoren/ffmpeg_service.git
