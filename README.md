@@ -1,6 +1,6 @@
 <img src="https://github.com/mehmetgoren/feniks/blob/main/logo.png" width="150" height="150"/>
 
-# Feniks -A computer based NVR with AI capabilities 
+# Feniks - A computer based NVR with AI capabilities 
 
 * The installation process can be done effortlessly since all nine services are Dockerized and can be run by Docker-Compose in one single command.
 
