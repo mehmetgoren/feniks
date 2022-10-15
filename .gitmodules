@@ -7,3 +7,6 @@
 [submodule "detect_service"]
 	path = detect_service
 	url = https://github.com/mehmetgoren/detect_service.git
+[submodule "snapshot_service"]
+	path = snapshot_service
+	url = https://github.com/mehmetgoren/snapshot_service.git
