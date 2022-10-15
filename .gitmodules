@@ -19,3 +19,6 @@
 [submodule "ffmpeg_service"]
 	path = ffmpeg_service
 	url = https://github.com/mehmetgoren/ffmpeg_service.git
+[submodule "facial_recognition"]
+	path = facial_recognition
+	url = https://github.com/mehmetgoren/facial_recognition.git
