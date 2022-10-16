@@ -19,11 +19,11 @@
     * The Web Application (Javascript/Typescript, Vue3, Quasar).
     * The Persistent RTSP Reader Service For AI (Python).
 
-* Runs natively on Linux. Windows and macOS are not officialy supported.
+* Runs natively on Linux.
 * Uses FFmpeg to handle video, audio, snapshot, probing and streaming.
 * Uses Redis as a main NoSql database and massage broker.
 
-* MongoDB / SQLite is used for AI Events and query databases.
+* MongoDB or SQLite is used for AI Events and query databases.
 
 * The web application supports more than one user and node server.
 
