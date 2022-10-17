@@ -5,10 +5,10 @@
 # Feniks - A computer based NVR with AI capabilities 
 
 ## Installation
-* The installation process can be done effortlessly since all services are Dockerized and can be run by Docker-Compose in one single command. I' ve created a <a href="yaml-generator.html" target='_blank'>wizard</a> to make generating Docker-Compose file easy. 
+* The installation process can be done effortlessly since all services are Dockerized and can be run by Docker-Compose in one single command. I' ve created a <a href="https://mehmetgoren.github.io/" target='_blank'>wizard</a> to make generating Docker-Compose file easy. 
     * Install Docker on your system: https://docs.docker.com/get-docker/
     * Install Docker Compose: https://docs.docker.com/compose/install/
-    * Create docker-compose.yml file by using the <a href="yaml-generator.html" target='_blank'>wizard</a>
+    * Create docker-compose.yml file by using the <a href="https://mehmetgoren.github.io/" target='_blank'>wizard</a>
     * Open a terminal from the location where the generated docker-compose.yml file is located.
     * run 'docker-compose.yml' command to start Feniks.
 
