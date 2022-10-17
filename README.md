@@ -10,7 +10,8 @@
     * Install Docker Compose: https://docs.docker.com/compose/install/
     * Create docker-compose.yml file by using the <a href="https://mehmetgoren.github.io/" target='_blank'>wizard</a>
     * Open a terminal from the location where the generated docker-compose.yml file is located.
-    * run 'docker-compose.yml' command to start Feniks.
+    * Run 'docker-compose up' command to start Feniks.
+    * Open your browser and navigate to 'http://localhost:8080' after all servis is initialzed.
 
 ## Screenshots
 <p align="center">
