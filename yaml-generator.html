@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="description" content="Fenik Docker-Compose YAML  Generator" />
+    <meta charset="utf-8">
+    <title>Fenik Docker-Compose YAML Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            background-color: #f6f6f6;
+        }
+
+        .container {
+            background-color: #fff;
+        }
+
+        .step-wrapper {
+            padding: 20px 0;
+            display: none;
+        }
+
+        .step-wrapper.active {
+            display: block;
+        }
+
+        .step-indicator {
+            border-collapse: separate;
+            display: table;
+            margin-left: 0px;
+            position: relative;
+            table-layout: fixed;
+            text-align: center;
+            vertical-align: middle;
+            padding-left: 0;
+            padding-top: 20px;
+        }
+
+        .step-indicator li {
+            display: table-cell;
+            position: relative;
+            float: none;
+            padding: 0;
+            width: 1%;
+        }
+
+        .step-indicator li:after {
+            background-color: #ccc;
+            content: "";
+            display: block;
+            height: 1px;
+            position: absolute;
+            width: 100%;
+            top: 32px;
+        }
+
+        .step-indicator li:after {
+            left: 50%;
+        }
+
+        .step-indicator li:last-child:after {
+            display: none;
+        }
+
+        .step-indicator li.active .step {
+            border-color: #4183d7;
+            color: #4183d7;
+        }
+
+        .step-indicator li.active .caption {
+            color: #4183d7;
+        }
+
+        .step-indicator li.complete:after {
+            background-color: #87d37c;
+        }
+
+        .step-indicator li.complete .step {
+            border-color: #87d37c;
+            color: #87d37c;
+        }
+
+        .step-indicator li.complete .caption {
+            color: #87d37c;
+        }
+
+        .step-indicator .step {
+            background-color: #fff;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            color: #ccc;
+            font-size: 24px;
+            height: 64px;
+            line-height: 64px;
+            margin: 0 auto;
+            position: relative;
+            width: 64px;
+            z-index: 1;
+        }
+
+        .step-indicator .step:hover {
+            cursor: pointer;
+        }
+
+        .step-indicator .caption {
+            color: #ccc;
+            padding: 11px 16px;
+        }
+
+        .step {
+            background-color: #fff;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            color: #ccc;
+            font-size: 24px;
+            height: 64px;
+            line-height: 64px;
+            margin: 0 auto;
+            position: relative;
+            width: 64px;
+            z-index: 1;
+        }
+
+        .step .hover {
+            cursor: pointer;
+        }
+
+        .caption {
+            color: #ccc;
+            padding: 11px 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <form style="margin-top: 15px;">
+        <div id="app" class="container">
+            <div style="display: flex;flex-direction: column; justify-content: center; text-align: center;">
+                <h3>Feniks Docker-Compose YAML file generator</h3>
+            </div>
+            <step-navigation :steps="steps" :currentstep="currentstep">
+            </step-navigation>
+
+            <div v-show="currentstep === 1">
+                <div class="form-group">
+                    <label for="select">Add Redis and MongoDB entries to Docker-Compose YAML file?</label>
+                    <select class="form-control" name="select" v-model="model.includeRedisMongo">
+                        <option :value="true">Yes</option>
+                        <option :value="false">No</option>
+                    </select>
+                    <small class="form-text text-muted">
+                        <label>This option is not recomended since all your data can be deleted after
+                            'Docker-Compose down' commmand.</label>
+                        <label>You can install Redis and MongoDB separately by Docker using those commands:</label>
+                        <ul>
+                            <li>redis: docker run --name redis-instance -p 6379:6379 --restart unless-stopped -d
+                                redis redis-server --save 60 1 --loglevel warning</li>
+                            <li>mangodb (x86 PC): docker run -p 27017:27017 --name mongo-instance --restart
+                                unless-stopped mongo:latest</li>
+                            <li>mangodb (ARM64 V8): docker run -p 27017:27017 --name mongo-instance --restart
+                                unless-stopped mongo:4.2.22 </li>
+                        </ul>
+                    </small>
+                    <label v-if="!model.includeRedisMongo" for="redis_host">Redis Host</label>
+                    <input v-if="!model.includeRedisMongo" v-model="model.redis_host" class="form-control" />
+                    <div style="margin-top: 15px"></div>
+                    <label v-if="!model.includeRedisMongo" for="redis_port">Redis Port</label>
+                    <input v-if="!model.includeRedisMongo" v-model="model.redis_port" class="form-control"
+                        name="redis_port" type="number" />
+                    <div style="margin-top: 15px"></div>
+                    <label v-if="!model.includeRedisMongo" for="mongo_conn_str">Mongo Connection String</label>
+                    <input v-if="!model.includeRedisMongo" v-model="model.mongo_conn_str" class="form-control"
+                        name="mongo_conn_str" />
+                </div>
+            </div>
+
+            <div v-show="currentstep === 2">
+                <div class="form-group">
+                    <label for="select">Device</label>
+                    <select class="form-control" name="select" v-model="model.device">
+                        <option :value="1">X86 PC</option>
+                        <option :value="2">Nvidia Jetson</option>
+                        <option :value="3">Raspberry PI 4</option>
+                    </select>
+                </div>
+            </div>
+
+            <div v-show="currentstep === 3">
+                <div class="form-group">
+                    <label for="rootPath">Path</label>
+                    <input v-model="model.rootPath" name="rootPath" class="form-control">
+                    <small class="form-text text-muted">A root directory path for all AI and recoding
+                        data.</small>
+                </div>
+            </div>
+
+            <div v-show="currentstep === 4">
+                <div class="form-group">
+                    <label for="time_zones">Time Zone</label>
+                    <select class="form-control" name="time_zones" v-model="model.timeZone">
+                        <option v-for="z in timeZones" :value="z">{{z}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div v-show="currentstep === 5">
+                <div class="form-group">
+                    <label for="time_zones">Do you have a Nvidia GPU?</label>
+                    <select class="form-control" name="select" v-model="model.hasNvidiaGpu"
+                        :disabled="model.device!==1">
+                        <option :value="true">Yes</option>
+                        <option :value="false">No</option>
+                    </select>
+                    <small class="form-text text-muted"> Make sure to install
+                        <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html" target="_blank">
+                             The NVIDIA Container Toolkit
+                        </a>
+                        if you have a Nvidia GPU.
+                    </small>
+                </div>
+            </div>
+
+            <div v-show="currentstep === 6">
+                <div class="form-group">
+                    <label for="aiServiceType">AI Service Type</label>
+                    <select class="form-control" name="aiServiceType" v-model="model.aiServiceType">
+                        <option :value="1">Feniks AI Services</option>
+                        <option :value="2">DeepStack AI Service</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="odEnabled">Enable Object Detection?</label>
+                    <select class="form-control" name="odEnabled" v-model="model.odEnabled">
+                        <option :value="true">Yes</option>
+                        <option :value="false">No</option>
+                    </select>
+                </div>
+                <div class="form-group" v-show="model.aiServiceType===1&&model.device===1&&model.odEnabled">
+                    <label for="feniksOdType">Feniks Object Detection Technology?</label>
+                    <select class="form-control" name="feniksOdType" v-model="model.feniksOdType">
+                        <option :value="1">PyTorch</option>
+                        <option :value="2">Tenserflow</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="frEnabled">Enable Facial Recognition?</label>
+                    <select class="form-control" name="frEnabled" v-model="model.frEnabled">
+                        <option :value="true">Yes</option>
+                        <option :value="false">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="alprEnabled">Enable Licence Plate Detection?</label>
+                    <select class="form-control" name="alprEnabled" v-model="model.alprEnabled">
+                        <option :value="true">Yes</option>
+                        <option :value="false">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="cv2ReadEnabled">Enable OpenCV RTSP Reader Service?</label>
+                    <select class="form-control" name="cv2ReadEnabled" v-model="model.cv2ReadEnabled">
+                        <option :value="true">Yes</option>
+                        <option :value="false">No</option>
+                    </select>
+                </div>
+            </div>
+
+            <step v-for="step in steps" :currentstep="currentstep" :key="step.id" :step="step" @on-generate="onGenerate"
+                :stepcount="steps.length" @step-change="stepChanged" :next-step-disabled="nextStepDisabled">
+            </step>
+        </div>
+
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.js"
+        integrity="sha512-CwxrLIN0dww6lRc/oKeZiI9oGlOob2HPMU0Yu0g+P3/G1cuTii+tt0jpyEKhilfrV7D/zmvKiVPIHUDU6xbBxg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script>
+        const timeZones = ["Etc/GMT+12", "Etc/GMT+11", "America/Adak", "Pacific/Honolulu", "Pacific/Marquesas", "America/Anchorage", "Etc/GMT+9", "America/Tijuana", "Etc/GMT+8", "America/Los_Angeles", "America/Phoenix", "America/Chihuahua", "America/Denver", "America/Guatemala", "America/Chicago", "Pacific/Easter", "America/Mexico_City", "America/Regina", "America/Bogota", "America/Cancun", "America/New_York", "America/Port-au-Prince", "America/Havana", "America/Indiana/Indianapolis", "America/Grand_Turk", "America/Asuncion", "America/Halifax", "America/Caracas", "America/Cuiaba", "America/La_Paz", "America/Santiago", "America/St_Johns", "America/Araguaina", "America/Sao_Paulo", "America/Cayenne", "America/Argentina/Buenos_Aires", "America/Godthab", "America/Montevideo", "America/Punta_Arenas", "America/Miquelon", "America/Bahia", "Etc/GMT+2", "Etc/GMT+2", "Atlantic/Azores", "Atlantic/Cape_Verde", "Etc/UTC", "Africa/Casablanca", "Europe/London", "Atlantic/Reykjavik", "Europe/Berlin", "Europe/Budapest", "Europe/Paris", "Africa/Sao_Tome", "Europe/Warsaw", "Africa/Lagos", "Asia/Amman", "Europe/Bucharest", "Asia/Beirut", "Africa/Cairo", "Europe/Chisinau", "Asia/Damascus", "Asia/Hebron", "Africa/Johannesburg", "Europe/Kiev", "Asia/Jerusalem", "Europe/Kaliningrad", "Africa/Khartoum", "Africa/Tripoli", "Africa/Windhoek", "Asia/Baghdad", "Europe/Istanbul", "Asia/Riyadh", "Europe/Minsk", "Europe/Moscow", "Africa/Nairobi", "Asia/Tehran", "Asia/Dubai", "Europe/Astrakhan", "Asia/Baku", "Europe/Samara", "Indian/Mauritius", "Europe/Saratov", "Asia/Tbilisi", "Asia/Yerevan", "Asia/Kabul", "Asia/Tashkent", "Asia/Yekaterinburg", "Asia/Karachi", "Asia/Kolkata", "Asia/Colombo", "Asia/Kathmandu", "Asia/Almaty", "Asia/Dhaka", "Asia/Omsk", "Asia/Yangon", "Asia/Bangkok", "Asia/Barnaul", "Asia/Hovd", "Asia/Krasnoyarsk", "Asia/Novosibirsk", "Asia/Tomsk", "Asia/Shanghai", "Asia/Irkutsk", "Asia/Singapore", "Australia/Perth", "Asia/Taipei", "Asia/Ulaanbaatar", "Asia/Pyongyang", "Australia/Eucla", "Asia/Chita", "Asia/Tokyo", "Asia/Seoul", "Asia/Yakutsk", "Australia/Adelaide", "Australia/Darwin", "Australia/Brisbane", "Australia/Sydney", "Pacific/Port_Moresby", "Australia/Hobart", "Asia/Vladivostok", "Australia/Lord_Howe", "Pacific/Bougainville", "Asia/Srednekolymsk", "Asia/Magadan", "Pacific/Norfolk", "Asia/Sakhalin", "Pacific/Guadalcanal", "Asia/Kamchatka", "Pacific/Auckland", "Etc/GMT-12", "Pacific/Fiji", "Asia/Kamchatka", "Pacific/Chatham", "Etc/GMT-13", "Pacific/Tongatapu", "Pacific/Apia", "Pacific/Kiritimati"];
+        timeZones.sort();
+
+        const downloadObjectAsYaml = (yamlString) => {
+            const dataStr = 'data:text/yml;charset=utf-8,' + encodeURIComponent(yamlString);
+            const downloadAnchorNode = document.createElement('a');
+            downloadAnchorNode.setAttribute('href',     dataStr);
+            downloadAnchorNode.setAttribute('download', 'dcoker-compose.yml');
+            document.body.appendChild(downloadAnchorNode); // required for firefox
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
+        };
+
+        const createImageTag = (model) => {
+            return `v1.0.0-${(model.device === 1 ? 'amd64' : 'arm64v8')}`;
+        };
+
+        const createDefaultEnvVariables = (model) => {
+            const env = [];
+            env.push(`TZ=${model.timeZone}`);
+            env.push(`REDIS_HOST=${model.redis_host}`);
+            env.push(`REDIS_PORT=${createRedisPort(model)}`);
+            return env;
+        };
+
+        const createVolumes = (dockerSocket, model) => {
+            arr = [];
+            if (dockerSocket) {
+                arr.push("/var/run/docker.sock:/var/run/docker.sock");
+            }
+            if (model) {
+                arr.push(`${model.rootPath}:${model.rootPath}`)
+            }
+            return arr;
+        };
+
+        const createNvidiaGpuObj = () => {
+            return {
+                resources: {
+                    reservations: {
+                        devices: [{
+                            driver: 'nvidia',
+                            count: 1,
+                            capabilities: '[gpu]'
+                        }]
+                    }
+                }
+            };
+        };
+
+        const createRedisPort = (model) => {
+            let port = parseInt(model.redis_port);
+            port = port === NaN ? 6379 : port;
+            return port
+        };
+
+        const createRedis = (model) => {
+            const redis = { image: 'redis', container_name: 'redis-instance', restart: 'unless-stopped' };
+            const port = createRedisPort(model);
+            redis.ports = [];
+            redis.ports.push(`${port}:6379`);
+            return redis;
+        };
+
+        const createMongo = (model) => {
+            const image = model.device === 1 ? 'mongo:latest' : 'mongo:4.2.22';
+            let port = 27017;
+            if (model.mongo_conn_str) {
+                const splits = model.mongo_conn_str.split(':')
+                let splitPortStr = splits[splits.length - 1]
+                const mongoPort = parseInt(splitPortStr);
+                if (mongoPort !== NaN) {
+                    port = mongoPort;
+                }
+            }
+            const mongo = { image, container_name: 'mongo-instance', restart: 'unless-stopped' };
+            mongo.ports = [];
+            mongo.ports.push(`${port}:27017`);
+            return mongo;
+        };
+
+        const createMngr = (model) => {
+            const mngr = {
+                image: `gokalpgoren/mngr:${createImageTag(model)}`,
+                container_name: 'mngr-instance', restart: 'unless-stopped', network_mode: 'host'
+            };
+
+            if (model.includeRedisMongo) {
+                mngr.depends_on = [];
+                mngr.depends_on.push(...['redis', 'mongo']);
+            }
+
+            env = [];
+            env.push(...createDefaultEnvVariables(model));
+
+            env.push('WEBSERVER_PORT=8072');
+            env.push(`MONGODB_CS=${model.mongo_conn_str}`);
+
+            let dt = model.hasNvidiaGpu ? 1 : 0;
+            if (dt === 0 && model.device !== 1) {
+                dt = model.device;
+            }
+
+            env.push(`DEEPSTACK_DT=${dt}`);
+            env.push(`DEEPSTACK_OD=${model.odEnabled ? 1 : 0}`);
+            env.push(`DEEPSTACK_FR=${model.frEnabled ? 1 : 0}`);
+
+            env.push(`ROOT_DIR_PATH=${model.rootPath}`);
+
+            mngr.environment = env;
+
+            if (model.hasNvidiaGpu) {
+                mngr.deploy = createNvidiaGpuObj();
+            }
+            mngr.volumes = createVolumes(true, model);
+
+            return mngr;
+        };
+
+        const createFFmpeg = (model) => {
+            const ffmpeg = {
+                image: `gokalpgoren/ffmpeg_service:${createImageTag(model)}`,
+                container_name: 'ffmpeg_service-instance', restart: 'unless-stopped', network_mode: 'host'
+            }
+
+            ffmpeg.depends_on = [];
+            if (model.includeRedisMongo) {
+                ffmpeg.depends_on.push('redis');
+            }
+            ffmpeg.depends_on.push('mngr');
+
+            env = [];
+            env.push(...createDefaultEnvVariables(model));
+            if (model.hasNvidiaGpu) {
+                env.push('NVIDIA_DRIVER_CAPABILITIES=all');
+            }
+            ffmpeg.environment = env;
+
+            if (model.hasNvidiaGpu) {
+                ffmpeg.deploy = createNvidiaGpuObj();
+            }
+
+            ffmpeg.volumes = createVolumes(true, model);
+
+            return ffmpeg;
+
+        };
+
+        const createSnapshot = (model) => {
+            const snapshot = {
+                image: `gokalpgoren/snapshot_service:${createImageTag(model)}`,
+                container_name: 'snapshot_service-instance', restart: 'unless-stopped', network_mode: 'host'
+            };
+
+            snapshot.depends_on = [];
+            if (model.includeRedisMongo) {
+                snapshot.depends_on.push('redis');
+            }
+            snapshot.depends_on.push('ffmpeg_service');
+
+            env = [];
+            env.push(...createDefaultEnvVariables(model));
+            snapshot.environment = env;
+
+            return snapshot
+        };
+
+        const createSmcp = (model) => {
+            const smcp = {
+                image: `gokalpgoren/smcp:${createImageTag(model)}`,
+                container_name: 'smcp-instance', restart: 'unless-stopped', network_mode: 'host'
+            };
+            smcp.depends_on = [];
+            if (model.includeRedisMongo) {
+                smcp.depends_on.push(...['redis', 'mongo']);
+            }
+            smcp.depends_on.push('mngr');
+
+            env = [];
+            env.push(...createDefaultEnvVariables(model));
+            smcp.environment = env;
+
+            smcp.volumes = createVolumes(false, model);
+
+            return smcp;
+
+        };
+
+        const createOnvf = (model) => {
+            const onvf = {
+                image: `gokalpgoren/onvf:${createImageTag(model)}`,
+                container_name: 'onvf-instance', restart: 'unless-stopped', network_mode: 'host'
+            };
+
+            if (model.includeRedisMongo) {
+                onvf.depends_on = [];
+                onvf.depends_on.push('redis');
+            }
+
+            env = [];
+            env.push(...createDefaultEnvVariables(model));
+            onvf.environment = env;
+
+            onvf.volumes = createVolumes(true, null);
+
+            return onvf;
+        };
+
+        const createWebApp = (model) => {
+            const webApp = {
+                image: `gokalpgoren/webapp:${createImageTag(model)}`,
+                container_name: 'webapp-instance', restart: 'unless-stopped'
+            };
+
+            webApp.depends_on = [];
+            webApp.depends_on.push('mngr');
+
+            env = [];
+            env.push(...createDefaultEnvVariables(model));
+            webApp.environment = env;
+
+            webApp.ports = ['8080:80'];
+
+            return webApp;
+
+        };
+
+        const createCv2ReadService = (model) => {
+            const cv2 = {
+                image: `gokalpgoren/cv2_read_service:${createImageTag(model)}`,
+                container_name: 'cv2_read_service-instance', restart: 'unless-stopped', network_mode: 'host'
+            };
+
+            cv2.depends_on = [];
+            cv2.depends_on.push('redis');
+
+            env = [];
+            env.push(...createDefaultEnvVariables(model));
+            cv2.environment = env;
+
+            return cv2
+        };
+
+        const createOdPytorch = (model) => {
+            const pytorch = {
+                image: `gokalpgoren/detect_service_pytorch:${createImageTag(model)}`,
+                container_name: 'detect_service_pytorch-instance', restart: 'unless-stopped', network_mode: 'host'
+            };
+
+            pytorch.depends_on = [];
+            if (model.includeRedisMongo) {
+                pytorch.depends_on.push('redis');
+            }
+            pytorch.depends_on.push('ffmpeg_service');
+            pytorch.depends_on.push('snapshot_service');
+            pytorch.depends_on.push('smcp');
+
+            env = [];
+            env.push(...createDefaultEnvVariables(model));
+            if (model.hasNvidiaGpu) {
+                env.push('NVIDIA_DRIVER_CAPABILITIES=all');
+            }
+            pytorch.environment = env;
+
+            if (model.hasNvidiaGpu) {
+                pytorch.deploy = createNvidiaGpuObj();
+            }
+
+            return pytorch;
+        };
+
+        const createOdTf = (model) => {
+            const tf = {
+                image: `gokalpgoren/detect_service_tf:${createImageTag(model)}`,
+                container_name: 'detect_service_tf-instance', restart: 'unless-stopped', network_mode: 'host'
+            };
+
+            tf.depends_on = [];
+            if (model.includeRedisMongo) {
+                tf.depends_on.push('redis');
+            }
+            tf.depends_on.push('ffmpeg_service');
+            tf.depends_on.push('snapshot_service');
+            tf.depends_on.push('smcp');
+
+            env = [];
+            env.push(...createDefaultEnvVariables(model));
+            if (model.hasNvidiaGpu) {
+                env.push('NVIDIA_DRIVER_CAPABILITIES=all');
+            }
+            tf.environment = env;
+
+            if (model.hasNvidiaGpu) {
+                tf.deploy = createNvidiaGpuObj();
+            }
+
+            return tf;
+        };
+
+        const createOdJetson = (model) => {
+            const jetson = {
+                image: `gokalpgoren/detect_service_jetson:${createImageTag(model)}`,
+                container_name: 'detect_service_jetson-instance', restart: 'unless-stopped', network_mode: 'host'
+            };
+
+            jetson.depends_on = [];
+            if (model.includeRedisMongo) {
+                jetson.depends_on.push('redis');
+            }
+            jetson.depends_on.push('ffmpeg_service');
+            jetson.depends_on.push('snapshot_service');
+            jetson.depends_on.push('smcp');
+
+            jetson.runtime = "nvidia"
+
+            env = [];
+            env.push(...createDefaultEnvVariables(model));
+            env.push('DISPLAY=$DISPLAY');
+            jetson.environment = env;
+
+            v = [];
+            v.push('/tmp/.X11-unix/:/tmp/.X11-unix');
+            v.push('/tmp/argus_socket:/tmp/argus_socket');
+            v.push('/etc/enctune.conf:/etc/enctune.conf');
+            v.push('/home/gokalp/Documents/jetson-inference/data:/jetson-inference/data');
+            v.push('/home/gokalp/Documents/jetson-inference/python/training/classification/data:/jetson-inference/python/training/classification/data');
+            v.push('/home/gokalp/Documents/jetson-inference/python/training/classification/models:/jetson-inference/python/training/classification/models');
+            v.push('/home/gokalp/Documents/jetson-inference/python/training/detection/ssd/data:/jetson-inference/python/training/detection/ssd/data');
+            v.push('/home/gokalp/Documents/jetson-inference/python/training/detection/ssd/models:/jetson-inference/python/training/detection/ssd/models gokalpgoren/detect_service_jetson:v1.0.0-arm64');
+
+            jetson.volumes = v;
+
+            return jetson;
+        };
+
+        const createFr = (model) =>{
+            const fr = {
+                image: `gokalpgoren/face_recognition_pytorch:${createImageTag(model)}`,
+                container_name: 'face_recognition_pytorch-instance', restart: 'unless-stopped', network_mode: 'host'
+            };
+
+            fr.depends_on = [];
+            if (model.includeRedisMongo) {
+                fr.depends_on.push('redis');
+            }
+            fr.depends_on.push('ffmpeg_service');
+            fr.depends_on.push('snapshot_service');
+            fr.depends_on.push('smcp');
+
+            env = [];
+            env.push(...createDefaultEnvVariables(model));
+            if (model.hasNvidiaGpu) {
+                env.push('NVIDIA_DRIVER_CAPABILITIES=all');
+            }
+            fr.environment = env;
+
+            if (model.hasNvidiaGpu) {
+                fr.deploy = createNvidiaGpuObj();
+            }
+
+            fr.volumes = createVolumes(false, model);
+
+            return fr;
+        };
+
+        const createAlpr = (model) => {
+            const alpr = {
+                image: `gokalpgoren/alpr:${createImageTag(model)}`,
+                container_name: 'alpr-instance', restart: 'unless-stopped', network_mode: 'host'
+            };
+
+            alpr.depends_on = [];
+            if (model.includeRedisMongo) {
+                alpr.depends_on.push('redis');
+            }
+            alpr.depends_on.push('ffmpeg_service');
+
+            env = [];
+            env.push(...createDefaultEnvVariables(model));
+            alpr.environment = env;
+
+            alpr.volumes = createVolumes(true, null);
+            alpr.volumes.push('/tmp/alpr:/tmp/alpr');
+
+            return alpr;
+        };
+
+        const createDeepStack = (model) =>{
+            const ds = {
+                image: `gokalpgoren/deepstack_service:${createImageTag(model)}`,
+                container_name: 'deepstack_service-instance', restart: 'unless-stopped', network_mode: 'host'
+            };
+
+            ds.depends_on = [];
+            if (model.includeRedisMongo) {
+                ds.depends_on.push('redis');
+            }
+            ds.depends_on.push('ffmpeg_service');
+            ds.depends_on.push('snapshot_service');
+            ds.depends_on.push('smcp');
+
+            env = [];
+            env.push(...createDefaultEnvVariables(model));
+            ds.environment = env;
+
+            ds.volumes = createVolumes(true, model);
+
+            return ds;
+        };
+
+        const buildYaml = (model) => {
+            const js = { version: '3', services: {} };
+            if (model.includeRedisMongo) {
+                js.services.redis = createRedis(model);
+                js.services.mongo = createMongo(model);
+            }
+            js.services.mngr = createMngr(model);
+            js.services.ffmpeg_service = createFFmpeg(model);
+            js.services.snapshot_service = createSnapshot(model);
+            js.services.smcp = createSmcp(model);
+            js.services.onvf = createOnvf(model);
+            js.services.webapp = createWebApp(model);
+            if (model.cv2ReadEnabled) {
+                js.services.cv2_read_service = createCv2ReadService(model);
+            }
+            if (model.aiServiceType === 1) { //Feniks
+                if (model.odEnabled) {
+                    if (model.device == 1) { // x86 PC
+                        switch (model.feniksOdType) {
+                            case 1:
+                                js.services.detect_service_pytorch = createOdPytorch(model);
+                                break;
+                            case 2:
+                                js.services.detect_service_tf = createOdTf(model);
+                                break;
+                        }
+                    } else if (model.device === 2) { // Jetson {
+                        js.services.detect_service_jetson = createOdJetson(model);
+                    }
+                }
+                if (model.frEnabled){
+                    js.services.face_recognition_pytorch = createFr(model);
+                }
+            } else if (model.aiServiceType === 2) { //DeepStack
+                js.services.deepstack_service = createDeepStack(model);
+            }
+            if (model.alprEnabled){
+                js.services.alpr = createAlpr(model);
+            }
+            const yaml = jsyaml.dump(js);
+            return yaml.replaceAll("'[gpu]'", "[ gpu ]");
+        };
+
+        $(function () {
+            Vue.component("step-navigation-step", {
+                template: `<li :class="indicatorclass">
+                        <div class="step"><i :class="step.icon_class" ></i></div>
+                        <div class="caption hidden-xs hidden-sm">Step <span v-text="step.id"></span>: <span v-text="step.title"></span></div>
+                       </li>`,
+
+                props: ["step", "currentstep"],
+
+                computed: {
+                    indicatorclass() {
+                        return {
+                            active: this.step.id == this.currentstep,
+                            complete: this.currentstep > this.step.id
+                        };
+                    }
+                }
+            });
+
+            Vue.component("step-navigation", {
+                template: `<ol class="step-indicator">
+                            <li v-for="step in steps" is="step-navigation-step" :key="step.id" :step="step" :currentstep="currentstep">
+                            </li>
+                       </ol>`,
+
+                props: ["steps", "currentstep"]
+            });
+
+            Vue.component("step", {
+                template: `<div class="step-wrapper" :class="stepWrapperClass">
+                    <button type="button" class="btn btn-primary" @click="lastStep" :disabled="firststep">
+                        Back
+                    </button>
+                    <button type="button" class="btn btn-primary" @click="nextStep" :disabled="nextstep">
+                        Next
+                    </button>
+                    <button type="button" class="btn btn-primary" v-if="laststep" @click='handleGenerateClicked'>
+                        Generate
+                    </button>
+                </div>`,
+
+                props: ["step", "stepcount", "currentstep", "nextStepDisabled"],
+                emits: ['on-generate'],
+                computed: {
+                    active() {
+                        return this.step.id == this.currentstep;
+                    },
+
+                    firststep() {
+                        return this.currentstep == 1;
+                    },
+                    nextstep() {
+                        return this.currentstep == this.stepcount || this.nextStepDisabled;
+                    },
+                    laststep() {
+                        return this.currentstep == this.stepcount
+                    },
+
+                    stepWrapperClass() {
+                        return {
+                            active: this.active
+                        };
+                    }
+                },
+
+                methods: {
+                    nextStep() {
+                        this.$emit("step-change", this.currentstep + 1);
+                    },
+
+                    lastStep() {
+                        this.$emit("step-change", this.currentstep - 1);
+                    },
+                    handleGenerateClicked() {
+                        this.$emit('on-generate');
+                    }
+                }
+            });
+
+            const app = new Vue({
+                el: '#app',
+                data() {
+                    return {
+                        currentstep: 1,
+                        steps: [
+                            {
+                                id: 1,
+                                title: "Database",
+                                icon_class: "bi-1-circle"
+                            },
+                            {
+                                id: 2,
+                                title: "Device",
+                                icon_class: "bi-pc-display"
+                            },
+                            {
+                                id: 3,
+                                title: "Root Directory Path",
+                                icon_class: "bi-folder"
+                            },
+                            {
+                                id: 4,
+                                title: "Time Zones",
+                                icon_class: "bi-globe"
+                            },
+                            {
+                                id: 5,
+                                title: "GPU",
+                                icon_class: "bi-gpu-card"
+                            },
+                            {
+                                id: 6,
+                                title: "AI",
+                                icon_class: "bi-cpu"
+                            }
+                        ],
+                        model: {
+                            includeRedisMongo: false, device: 1, rootPath: '', redis_host: '127.0.0.1', redis_port: 6379,
+                            mongo_conn_str: 'mongodb://localhost:27017', timeZone: 'Europe/London', hasNvidiaGpu: true, aiServiceType: 1,
+                            odEnabled: true, frEnabled: false, alprEnabled: false, cv2ReadEnabled: false, feniksOdType: 1,
+
+                        },
+                        timeZones,
+                        hi: 'hi',
+                        mode: 0,
+                    }
+                },
+                methods: {
+                    stepChanged(step) {
+                        this.currentstep = step;
+                    },
+                    onGenerate() {
+                        const yamlStr = buildYaml(this.model);
+                        downloadObjectAsYaml(yamlStr);
+                    }
+                },
+                computed: {
+                    nextStepDisabled() {
+                        return this.currentstep === this.steps.length || (this.currentstep === 3 && !this.model.rootPath)
+                    }
+                },
+                watch: {
+                    model: {
+                        handler(newModel) {
+                            console.log(JSON.stringify(this.model));
+                        },
+                        deep: true
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
