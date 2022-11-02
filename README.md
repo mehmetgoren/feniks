@@ -3,15 +3,21 @@
 </p>
 
 # Feniks - A computer based NVR with AI capabilities 
+* Connect any source FFmpeg supports and start streaming with low latency. 
+* Record your streams 7/24. 
+* Detects 80 different objects, recognizes human faces and car plates. 
+* Query your detection data fast and easy
+* If you want more, develop your own custom AI service and easily integrate with Feniks. 
+
 
 ## Installation
-* The installation process can be done effortlessly since all services are Dockerized and can be run by Docker-Compose in one single command. I' ve created a <a href="https://mehmetgoren.github.io/" target='_blank'>wizard</a> to make generating Docker-Compose file easy. 
+* The installation process can be done effortlessly since all services are dockerized and can be run by Docker-Compose in one single command. I' ve created a <a href="https://mehmetgoren.github.io/" target='_blank'>wizard</a> to make generating Docker-Compose file easy. 
     * Install Docker on your system: https://docs.docker.com/get-docker/
     * Install Docker Compose: https://docs.docker.com/compose/install/
     * Create docker-compose.yml file by using the <a href="https://mehmetgoren.github.io/" target='_blank'>wizard</a>
     * Open a terminal from the location where the generated docker-compose.yml file is located.
     * Run 'docker-compose up' command to start Feniks.
-    * Open your browser and navigate to 'http://localhost:8080' after all servis is initialzed.
+    * Open your browser and navigate to 'http://localhost:8080' after all service is initialized.
 
 ## Screenshots
 <p align="center">
@@ -120,18 +126,19 @@
     
 
 **Currently Developing Features List (Ordered By Release Date)**
-
-1. Creating the Mobile Application (which are being developed right now by Quasar Framework)
-2. Creating Central Hub System (which are being developed right now by using .Net Core) to access all nodes from a center. This project provides:
+1. Creating how to use documentation (coming soon)
+2. Create a demo website
+3. Creating the Mobile Application (which is being developed right now by Quasar Framework)
+4. Creating a Central Hub System (which are being developed right now by using .Net Core) to access all nodes from a center. This project provides:
     * To manage thousands of cameras from one single point.
     * Making data transfer to nodes easy (like camera brand specific RTSP route).
     * Connect any node from the center.
     * Creating a total statistical information and meaningful dashboard.
     * Listing all failed cameras and forcing the user to take an immediate action.
     * Adding new REST endpoints to fully control Nodes remotely.
-3. Adding Windows support. 
-4. Positive/negative list support for facial recognition.
-5. Adding camera location info registration support by Google Maps.
-6. Adding Amazon S3, Microsoft OneDrive and Dropbox support as cloud providers.
-7. Making ONVIF support more compatible and superior like PTZ (Pan-Tilt-Zoom Support for Cameras) support.
-8 . Adding Tensorflow/PyTorch Pose Estimation deep-learning models.
+5. Adding Windows support. 
+6. Positive/negative list support for facial recognition.
+7. Adding camera location info registration support by Google Maps.
+8. Adding Amazon S3, Microsoft OneDrive and Dropbox support as cloud providers.
+9. Making ONVIF support more compatible and superior like PTZ (Pan-Tilt-Zoom Support for Cameras) support.
+10. Adding Tensorflow/PyTorch Pose Estimation deep-learning models.
