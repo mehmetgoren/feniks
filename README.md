@@ -5,8 +5,8 @@
 # Feniks - A computer based NVR with AI capabilities 
 * Connect any source FFmpeg supports and start streaming with low latency. 
 * Record your streams 7/24. 
-* Detects 80 different objects, recognizes human faces and car plates. 
-* Query your detection data fast and easy
+* Detect 80 different objects, recognizes human faces and car plates. 
+* Query your detection data fast and easy.
 * If you want more, develop your own custom AI service and easily integrate with Feniks. 
 
 
@@ -126,9 +126,9 @@
     
 
 **Currently Developing Features List (Ordered By Release Date)**
-1. Creating how to use documentation (coming soon)
-2. Create a demo website
-3. Creating the Mobile Application (which is being developed right now by Quasar Framework)
+1. Creating how to use documentation (coming soon).
+2. Creating a demo website.
+3. Creating the Mobile Application (which is being developed right now by Quasar Framework).
 4. Creating a Central Hub System (which are being developed right now by using .Net Core) to access all nodes from a center. This project provides:
     * To manage thousands of cameras from one single point.
     * Making data transfer to nodes easy (like camera brand specific RTSP route).
