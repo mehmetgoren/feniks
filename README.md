@@ -6,7 +6,7 @@
 * Connect any source FFmpeg supports and start streaming with low latency. 
 * Record your streams 7/24. 
 * Detect 80 different objects, recognizes human faces and car plates. 
-* Query your detection data fast and easy.
+* Query your AI data fast and easy.
 * If you want more, develop your own custom AI service and easily integrate with Feniks. 
 
 
