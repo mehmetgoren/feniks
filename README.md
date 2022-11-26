@@ -3,12 +3,12 @@
 </p>
 
 # Feniks - A computer based NVR with AI capabilities 
+* ##### [Demo Link](http://46.197.220.143) (Runs on Nvidia Jetson Nano 4GB)
 * Connect any source FFmpeg supports and start streaming with low latency. 
 * Record your streams 7/24. 
 * Detect 80 different objects, recognizes human faces and car plates. 
 * Query your AI data fast and easy.
 * If you want more, develop your own custom AI service and easily integrate with Feniks. 
-
 
 ## Installation
 * The installation process can be done effortlessly since all services are dockerized and can be run by Docker-Compose in one single command. I' ve created a <a href="https://mehmetgoren.github.io/" target='_blank'>wizard</a> to make generating Docker-Compose file easy. 
