@@ -140,5 +140,5 @@
 4. Positive/negative list support for facial recognition.
 5. Adding camera location info registration support by Google Maps.
 6. Adding Amazon S3, Microsoft OneDrive and Dropbox support as cloud providers.
-7. Making ONVIF support more compatible and superior like PTZ (Pan-Tilt-Zoom Support for Cameras) support.
+7. Making ONVIF support more compatible and superior like adding PTZ (Pan-Tilt-Zoom Support for Cameras) support.
 8. Adding Tensorflow/PyTorch Pose Estimation deep-learning models.
