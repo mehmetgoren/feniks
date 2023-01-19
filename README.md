@@ -85,6 +85,8 @@
 
 * The services are tested on x86 workstation, Dell Intel x86 laptop, Raspberry PI (ARM664) and Nvidia Jetson Nano.
 
+* It supports multiple storages. You can assign any storage to any camera. 
+
 * Broken / failed connections are shown in the information page. If a stream fails more than once in a given time, a notification will be sent to receivers (users) by the cloud provider service.
 
 * Supported Stream Types are shown below:
