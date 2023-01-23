@@ -81,6 +81,8 @@
 
 * It can scan the whole network to find cameras which have RTSP broadcasts. You don’t need to find cameras’ IPs to register the system. All is done automatically.
 
+* You can search detected objects by its **color** in the Smart Search section. Other search options like shape, size, barcode,  etc. will be added in the future. 
+
 * All running node services can be viewed on the UI app. All Services can be started/stopped by using the services page.
 
 * The services are tested on x86 workstation, Dell Intel x86 laptop, Raspberry PI (ARM664) and Nvidia Jetson Nano.
