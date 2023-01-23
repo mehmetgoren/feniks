@@ -6,7 +6,7 @@
 * Connect any source FFmpeg supports and start streaming with low latency. 
 * Record your streams 7/24. 
 * Detect 80 different objects, recognizes human faces and car plates. 
-* Query your AI data fast and easy.
+* Query your AI data fast & easy by date, time, camera, label, score and color.
 * If you want more, develop your own custom AI service and easily integrate with Feniks. 
 
 ##### [Demo Link](http://46.197.220.143) (Runs on Nvidia Jetson Nano 4GB)
@@ -81,7 +81,7 @@
 
 * It can scan the whole network to find cameras which have RTSP broadcasts. You don’t need to find cameras’ IPs to register the system. All is done automatically.
 
-* You can search detected objects by its **color** in the Smart Search section. Other search options like shape, size, barcode,  etc. will be added in the future. 
+* You can search detected objects by their **color** in the Smart Search section. Other search options like shape, size, barcode,  etc. will be added in the future. 
 
 * All running node services can be viewed on the UI app. All Services can be started/stopped by using the services page.
 
