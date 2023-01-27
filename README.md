@@ -132,17 +132,9 @@
     
 
 **Currently Developing Features List (Ordered By Release Date)**
-1. Creating the Mobile Application (which is being developed right now by Quasar Framework).
-2. Creating a Central Hub System (which are being developed right now by using .Net Core) to access all nodes from a center. This project provides:
-    * To manage thousands of cameras from one single point.
-    * Making data transfer to nodes easy (like camera brand specific RTSP route).
-    * Connect any node from the center.
-    * Creating a total statistical information and meaningful dashboard.
-    * Listing all failed cameras and forcing the user to take an immediate action.
-    * Adding new REST endpoints to fully control Nodes remotely.
-3. Adding Windows support. 
-4. Positive/negative list support for facial recognition.
-5. Adding camera location info registration support by Google Maps.
-6. Adding Amazon S3, Microsoft OneDrive and Dropbox support as cloud providers.
-7. Making ONVIF support more compatible and superior like adding PTZ (Pan-Tilt-Zoom Support for Cameras) support.
-8. Adding Tensorflow/PyTorch Pose Estimation deep-learning models.
+1. Positive/negative list support for facial recognition.
+2. Adding camera location info registration support by Google Maps.
+3. Adding Amazon S3, Microsoft OneDrive and Dropbox support as cloud providers.
+4. Making ONVIF support more compatible and superior like adding PTZ (Pan-Tilt-Zoom Support for Cameras) support.
+5. Adding Tensorflow/PyTorch Pose Estimation deep-learning models.
+6. Adding Windows support.
