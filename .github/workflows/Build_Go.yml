@@ -17,9 +17,9 @@ jobs:
 
     - name: Build
       run: |
-      pwd
-      ls -latrh
-      
+        pwd
+        ls -latrh
+
     - name: Go-linter
       # You may pin to the exact commit or the version.
       # uses: Jerome1337/golint-action@2c695d223ee85ccf25d5e5e150a1b2dbc3fc3634
