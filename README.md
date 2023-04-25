@@ -132,9 +132,10 @@
     
 
 **Currently Developing Features List (Ordered By Release Date)**
-1. Positive/negative list support for facial recognition.
-2. Adding camera location info registration support by Google Maps.
-3. Adding Amazon S3, Microsoft OneDrive and Dropbox support as cloud providers.
-4. Making ONVIF support more compatible and superior like adding PTZ (Pan-Tilt-Zoom Support for Cameras) support.
-5. Adding Tensorflow/PyTorch Pose Estimation deep-learning models.
-6. Adding Windows support.
+1. H265 and [go2rtc](https://github.com/AlexxIT/go2rtc) support is comming.  
+2. Positive/negative list support for facial recognition.
+3. Adding camera location info registration support by Google Maps.
+4. Adding Amazon S3, Microsoft OneDrive and Dropbox support as cloud providers.
+5. Making ONVIF support more compatible and superior like adding PTZ (Pan-Tilt-Zoom Support for Cameras) support.
+6. Adding Tensorflow/PyTorch Pose Estimation deep-learning models.
+7. Adding Windows support.
