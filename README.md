@@ -62,7 +62,7 @@
 
 * Runs natively on Linux.
 * Uses <a href="https://ffmpeg.org/" target="_blank">FFmpeg</a> to handle video, audio, snapshot, probing and streaming.
-* Uses Redis as a main NoSql database and massage broker.
+* Uses Redis as a main NoSql database and message broker.
 
 * MongoDB or SQLite is used for AI Events and query databases.
 
