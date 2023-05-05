@@ -5,6 +5,7 @@
 # Feniks - A computer based NVR with AI capabilities 
 * Connect any source FFmpeg supports and start streaming with low latency. 
 * Record your streams 7/24. 
+* Supports H265.
 * Detect 80 different objects, recognizes human faces and car plates. 
 * Query your AI data fast & easy by date, time, camera, label, score and color.
 * If you want more, develop your own custom AI service and easily integrate with Feniks. 
@@ -97,10 +98,11 @@
     | FLV         |  *     |  *     | ****   |
     | HLS         |  *     |  ***** | *****  |
     | WebSockets  |  ***** |  *     | *****  |
+    | WebRTC      |  * |  *     | ****  |
    
 * Supported video codecs for both streaming and recording are:
     * H.264 (Software, VA-API, NVIDIA, INTEL, RASPBERRY PI)
-    * H.265 (Software, VA-API, NVIDIA, INTEL, streaming is not supported since browsers and  RTMP servers don’t support HEVC hardware decoding)
+    * H.265 (Software, VA-API, NVIDIA, INTEL, HEVC streaming is supported thanks to [go2rtc](https://github.com/AlexxIT/go2rtc))
     * AV1 (Software, VA-API, NVIDIA, INTEL)
     * VP8 (Software, VA-API, NVIDIA, INTEL)
     * VP9 (Software, VA-API, NVIDIA, INTEL)
@@ -115,6 +117,12 @@
 * Supported Video Container Formats:
     * MP4
     * WebM
+
+* Supported Media Servers:
+    * [go2rtc](https://github.com/AlexxIT/go2rtc) (H265 & H264). If you are unable to play H.265 streams or video records on your browser, please check out this [link](https://github.com/StaZhu/enable-chromium-hevc-hardware-decoding).
+    * [SRS](https://github.com/ossrs/srs) (H264)
+    * [LiveGo](https://github.com/gwuhaolin/livego) (H264)
+    * [Node Media Server](https://github.com/illuspas/Node-Media-Server) (H264)
    
 * All AI events (Object Detection, Face Recognition, Plate Recognition) can be queried by date, time, camera, label and score. All those fields are all indexed and saved as denormalized entities to provide best read performance even for big data.
 
@@ -127,15 +135,14 @@
     * Imagehash:  good accuracy and high performance. It is suitable for low cost  devices like Raspberry PI or Jetson Nano 
     * PSNR: Similar to Imagehash
 
-* Re-streaming via RTMP to reduce the number of connections to your camera
+* Re-streaming via media server to reduce the number of connections to your camera
     <img src="gallery/loopback_arc.png" />
     
 
 **Currently Developing Features List (Ordered By Release Date)**
-1. H265 and [go2rtc](https://github.com/AlexxIT/go2rtc) support is comming.  
-2. Positive/negative list support for facial recognition.
-3. Adding camera location info registration support by Google Maps.
-4. Adding Amazon S3, Microsoft OneDrive and Dropbox support as cloud providers.
-5. Making ONVIF support more compatible and superior like adding PTZ (Pan-Tilt-Zoom Support for Cameras) support.
-6. Adding Tensorflow/PyTorch Pose Estimation deep-learning models.
-7. Adding Windows support.
+1. Positive/negative list support for facial recognition.
+2. Adding camera location info registration support by Google Maps.
+3. Adding Amazon S3, Microsoft OneDrive and Dropbox support as cloud providers.
+4. Making ONVIF support more compatible and superior like adding PTZ (Pan-Tilt-Zoom Support for Cameras) support.
+5. Adding Tensorflow/PyTorch Pose Estimation deep-learning models.
+6. Adding Windows support.
