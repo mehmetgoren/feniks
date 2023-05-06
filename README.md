@@ -4,8 +4,7 @@
 
 # Feniks - A computer based NVR with AI capabilities 
 * Connect any source FFmpeg supports and start streaming with low latency. 
-* Record your streams 7/24. 
-* Supports H265.
+* Stream and record your videos 24/7 in both H.264 and H.265 formats directly from your browser..
 * Detect 80 different objects, recognizes human faces and car plates. 
 * Query your AI data fast & easy by date, time, camera, label, score and color.
 * If you want more, develop your own custom AI service and easily integrate with Feniks. 
