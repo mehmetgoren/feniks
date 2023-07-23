@@ -9,7 +9,6 @@
 * Query your AI data fast & easy by date, time, camera, label, score and color.
 * If you want more, develop your own custom AI service and easily integrate with Feniks. 
 
-##### [Demo Link](http://46.197.220.143) (Runs on Nvidia Jetson Nano 4GB)
 ##### [Documentation Link](https://feniks.gitbook.io/doc)
 
 ## Installation
