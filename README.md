@@ -5,7 +5,7 @@
 # Feniks - A computer based NVR with AI capabilities 
 * Connect any source FFmpeg supports and start streaming with low latency. 
 * Stream and record your videos 24/7 in both H.264 and H.265 formats directly from your browser..
-* Detect 80 different objects, recognizes human faces and car plates. 
+* Detect 80 different objects, recognizes human faces and car plates. There will be much more thanks to [CodeProject.AI](https://github.com/codeproject/CodeProject.AI-Server)
 * Query your AI data fast & easy by date, time, camera, label, score and color.
 * If you want more, develop your own custom AI service and easily integrate with Feniks. 
 
@@ -46,13 +46,14 @@
 </p>
 
 ## Technical Notes
-* Feniks consists of 11 different services. Those are:
+* Feniks consists of 12 different services. Those are:
     * The FFmpeg Service For Live 7/24 Streaming, Snapshot and Recording (Python).
     * The Object Detection Service (Python).
     * The Snapshot Service (Python Multi-Process)
     * The Facial Recognition Service (Python, PyTorch).
     * The Plate Recognition Service (Golang).
     * The DeepStack Service (Python).
+    * The [CodeProject.AI](https://github.com/codeproject/CodeProject.AI-Server) Service(Python).
     * The Onvif Service (Golang).
     * The Cloud and Notification Service (GoLang).
     * The Web/Websockets Server Service (Golang).
@@ -135,12 +136,3 @@
 
 * Re-streaming via media server to reduce the number of connections to your camera
     <img src="gallery/loopback_arc.png" />
-    
-
-**Currently Developing Features List (Ordered By Release Date)**
-1. Positive/negative list support for facial recognition.
-2. Adding camera location info registration support by Google Maps.
-3. Adding Amazon S3, Microsoft OneDrive and Dropbox support as cloud providers.
-4. Making ONVIF support more compatible and superior like adding PTZ (Pan-Tilt-Zoom Support for Cameras) support.
-5. Adding Tensorflow/PyTorch Pose Estimation deep-learning models.
-6. Adding Windows support.
