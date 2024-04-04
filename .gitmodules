@@ -19,9 +19,6 @@
 [submodule "facial_recognition"]
 	path = facial_recognition
 	url = https://github.com/mehmetgoren/facial_recognition.git
-[submodule "alpr"]
-	path = alpr
-	url = https://github.com/mehmetgoren/alpr.git
 [submodule "smcp"]
 	path = smcp
 	url = https://github.com/mehmetgoren/smcp.git
