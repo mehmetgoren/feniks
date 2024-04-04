@@ -10,9 +10,6 @@
 [submodule "snapshot_service"]
 	path = snapshot_service
 	url = https://github.com/mehmetgoren/snapshot_service.git
-[submodule "deepstack_service"]
-	path = deepstack_service
-	url = https://github.com/mehmetgoren/deepstack_service.git
 [submodule "ffmpeg_service"]
 	path = ffmpeg_service
 	url = https://github.com/mehmetgoren/ffmpeg_service.git
