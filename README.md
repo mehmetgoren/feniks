@@ -46,19 +46,13 @@
 </p>
 
 ## Technical Notes
-* Feniks consists of 12 different services. Those are:
+* Feniks consists of 6 different services. Those are:
     * The FFmpeg Service For Live 7/24 Streaming, Snapshot and Recording (Python).
-    * The Object Detection Service (Python).
     * The Snapshot Service (Python Multi-Process)
-    * The Facial Recognition Service (Python, PyTorch).
-    * The Plate Recognition Service (Golang).
-    * The DeepStack Service (Python).
     * The [CodeProject.AI](https://github.com/codeproject/CodeProject.AI-Server) Service(Python).
-    * The Onvif Service (Golang).
     * The Cloud and Notification Service (GoLang).
     * The Web/Websockets Server Service (Golang).
     * The Web Application (Javascript/Typescript, Vue3, Quasar).
-    * The Persistent RTSP Reader Service For AI (Python).
 
 * Runs natively on Linux.
 * Uses <a href="https://ffmpeg.org/" target="_blank">FFmpeg</a> to handle video, audio, snapshot, probing and streaming.
@@ -70,18 +64,7 @@
 
 * The UI app was developed by using Vue3 & <a href="https://quasar.dev/" target="_blank">Quasar</a>. It uses <a href="https://gridstackjs.com/" target="_blank">gridstack.js</a> to support highly customizable (like resize, dragging) video players.
 
-* Supported Deep-Learning Frameworks: PyTorch, Tensorflow and the Nvidia Jetson Library and  can be selected from the Config page.
-    * **PyTorch**: YOLOV5, [AlexNet](https://arxiv.org/abs/1404.5997), [VGG](https://arxiv.org/abs/1409.1556), [GoogLeNet](https://arxiv.org/abs/1409.4842), [MobileNetV3](https://arxiv.org/abs/1905.02244). For more information: [https://pytorch.org/vision/stable/models.html](https://pytorch.org/vision/stable/models.html)
-    * **Tensorflow**: Resnet V2, SSD, Faster RCNN, EfficientDet. For more information: [https://tfhub.dev/tensorflow/collections/object_detection](https://tfhub.dev/tensorflow/collections/object_detection)
-    * **Nvidia Jetson**: LPDNet, PeopleNet, ResNet-50, SSD. For more information: https://developer.nvidia.com/ai-models
-
-* Automatic plate recognition performs very well since it has a built-in job scheduler and LPR docker containers can be scaled up horizontally.
-
 * It has a built-in watchdog mechanism to monitor all processes and recover them.
-
-* It can scan the whole network to find cameras which have RTSP broadcasts. You don’t need to find cameras’ IPs to register the system. All is done automatically.
-
-* You can search detected objects by their **color** in the Smart Search section. Other search options like shape, size, barcode,  etc. will be added in the future. 
 
 * All running node services can be viewed on the UI app. All Services can be started/stopped by using the services page.
 
