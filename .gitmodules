@@ -22,9 +22,6 @@
 [submodule "facial_recognition"]
 	path = facial_recognition
 	url = https://github.com/mehmetgoren/facial_recognition.git
-[submodule "onvf"]
-	path = onvf
-	url = https://github.com/mehmetgoren/onvf.git
 [submodule "alpr"]
 	path = alpr
 	url = https://github.com/mehmetgoren/alpr.git
