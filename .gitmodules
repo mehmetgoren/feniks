@@ -1,6 +1,3 @@
 [submodule "snapshot_service"]
 	path = snapshot_service
 	url = https://github.com/mehmetgoren/snapshot_service.git
-[submodule "smcp"]
-	path = smcp
-	url = https://github.com/mehmetgoren/smcp.git
