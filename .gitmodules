@@ -1,6 +1,3 @@
-[submodule "feniks.web_app"]
-	path = feniks.web_app
-	url = https://github.com/mehmetgoren/feniks.web_app.git
 [submodule "mngr"]
 	path = mngr
 	url = https://github.com/mehmetgoren/mngr.git
