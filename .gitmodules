@@ -1,0 +1,18 @@
+[submodule "ffmpeg_service"]
+	path = ffmpeg_service
+	url = https://github.com/mehmetgoren/ffmpeg_service
+[submodule "snapshot_service"]
+	path = snapshot_service
+	url = https://github.com/mehmetgoren/snapshot_service
+[submodule "senseai_service"]
+	path = senseai_service
+	url = https://github.com/mehmetgoren/senseai_service
+[submodule "mngr"]
+	path = mngr
+	url = https://github.com/mehmetgoren/mngr
+[submodule "smcp"]
+	path = smcp
+	url = https://github.com/mehmetgoren/smcp
+[submodule "feniks.web_app"]
+	path = feniks.web_app
+	url = https://github.com/mehmetgoren/feniks.web_app
