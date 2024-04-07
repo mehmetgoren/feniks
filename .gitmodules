@@ -4,6 +4,3 @@
 [submodule "smcp"]
 	path = smcp
 	url = https://github.com/mehmetgoren/smcp.git
-[submodule "senseai_service"]
-	path = senseai_service
-	url = https://github.com/mehmetgoren/senseai_service
