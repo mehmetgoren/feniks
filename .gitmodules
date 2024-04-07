@@ -1,6 +1,3 @@
-[submodule "mngr"]
-	path = mngr
-	url = https://github.com/mehmetgoren/mngr.git
 [submodule "snapshot_service"]
 	path = snapshot_service
 	url = https://github.com/mehmetgoren/snapshot_service.git
