@@ -5,7 +5,7 @@
 # Feniks - A computer based NVR with AI capabilities 
 * Connect any source FFmpeg supports and start streaming with low latency. 
 * Stream and record your videos 24/7 in both H.264 and H.265 formats directly from your browser..
-* Detect 80 different objects, recognizes human faces and car plates. There will be much more thanks to [CodeProject.AI](https://github.com/codeproject/CodeProject.AI-Server)
+* Detect 80 different objects, recognizes human faces, car plates and characters (OCR). There will be much more thanks to [CodeProject.AI](https://github.com/codeproject/CodeProject.AI-Server)
 * Query your AI data fast & easy by date, time, camera, label, score and color.
 * If you want more, develop your own custom AI service and easily integrate with Feniks. 
 
